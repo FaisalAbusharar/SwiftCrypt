@@ -8,7 +8,15 @@
 Wanna know the best part? made only with **core python libraries**!
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Python Version](https://img.shields.io/badge/python-%3E%3D3.6-blue.svg)](https://www.python.org/downloads/release)
+.. image:: https://img.shields.io/pypi/v/swiftcrypt
+   :alt: PyPI
+   :target: https://pypi.org/project/swiftcrypt
+.. image:: https://img.shields.io/pypi/pyversions/swiftcrypt
+   :alt: PyPI - Python Version
+   :target: https://pypi.org/project/swiftcrypt
+.. image:: https://img.shields.io/pypi/dm/swiftcrypt
+   :alt: PyPI - Downloads
+   :target: https://pypistats.org/packages/swiftcrypt
 
 ## Features
 
