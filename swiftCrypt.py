@@ -90,8 +90,6 @@ class AdvancedGenerator:
         self.alphabet_numbers = list(string.digits)
         self.alphabet_special = list("!@#$%^&*")
 
-    def generate_random_chars(self, alpha, length):
-        return [random.choice(alpha) for _ in range(length)]
 
     def advanced_key(self, alpha: str, length: int, dashes: bool, dash_range: int, uppercase: bool, dual_cases: bool):
         key_list = []
