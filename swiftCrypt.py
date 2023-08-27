@@ -4,6 +4,7 @@ import hashlib
 import uuid
 import base64
 import secrets
+import math
 
 class SecretGenerator:
     def __init__(self):
@@ -147,33 +148,41 @@ class Checker:
     def __init__(self):
       pass
 
-    def check_password_strength(self, password,min_length=8,min_uppercase=1,min_lowercase=1,min_numbers=1,min_special=1,return_codes=False):
+    def check_password_strength(self, password,min_length=8,min_uppercase=1,min_lowercase=1,min_numbers=1,min_special=1,return_message=False):
+        
+        password_strength = 100
+        
+        
         if len(password) < min_length:
-            if return_codes != False: return 1
-            return "Weak: Password length should be at least {} characters.".format(min_length)
+            password_strength -= 20
+            if return_message != False: print(f"Password should be longer than {min_length-1}")
+            
 
         uppercase_count = sum(1 for char in password if char.isupper())
         if uppercase_count < min_uppercase:
-            if return_codes != False: return 2
-            return "Weak: Password should contain at least {} uppercase letter(s).".format(min_uppercase)
+            password_strength -= 20
+            if return_message != False: print("Password should contain at least {} uppercase letter(s).".format(min_uppercase))
 
         lowercase_count = sum(1 for char in password if char.islower())
         if lowercase_count < min_lowercase:
-            if return_codes != False: return 3
-            return "Weak: Password should contain at least {} lowercase letter(s).".format(min_lowercase)
+            password_strength -= 20
+            if return_message != False: print("Password should contain at least {} lowercase letter(s).".format(min_lowercase))
 
         numbers_count = sum(1 for char in password if char.isdigit())
         if numbers_count < min_numbers:
-            if return_codes != False: return 4
-            return "Weak: Password should contain at least {} number(s).".format(min_numbers)
+            password_strength -= 20
+            if return_message != False: print("Password should contain at least {} number(s)".format(min_numbers))
 
-        special_count = sum(1 for char in password if char in "!@#$%^&*")
+        special_count = sum(1 for char in password if char in "!@#$%^&*()-=+_)~")
         if special_count < min_special:
-            if return_codes != False: return 5
-            return "Weak: Password should contain at least {} special character(s).".format(min_special)
-
-        if return_codes != False: return 0
-        return "Strong: Password meets the strength criteria."
+            password_strength -= 20
+            if return_message != False: print("Password should contain at least {} special character(s).".format(min_special))
+        
+        if password_strength < 100:
+            if return_message != False: return(f"Password Strength: {password_strength}%.")
+        if return_message != False: return "Strong: Password meets the strength criteria."
+        
+        return password_strength
     
     def verify_password(self, password, hashed_password, salt):
         # Verify if a password matches a hashed password
@@ -184,15 +193,30 @@ class Checker:
 class Hash():
     def __init__(self):
         pass
-    
-    def generate_salt(self,salt_length=16):
-            # Generate a random salt
-            characters = string.ascii_letters + string.digits
-            salt = ''.join(random.choice(characters) for _ in range(salt_length))
-            return salt
 
     def hash_password(self, password, salt):
             # Hash a password using a combination of hashlib algorithms
             hashed_password = hashlib.sha256(password.encode('utf-8') + salt.encode('utf-8')).hexdigest()
             return hashed_password
                 
+
+class Salts:
+    def __init__(self, characters=string.ascii_letters + string.digits):
+        self.characters = characters
+
+    def generate_salt(self, salt_length=None):
+        if salt_length is None:
+            salt_length = random.randint(10, 30)
+
+        salt = ''.join(random.choice(self.characters) for _ in range(salt_length))
+        return salt
+
+    def generate_pool(self, pool_size: int, salt_length=None):
+        salt_pool = [self.generate_salt(salt_length) for _ in range(pool_size)]
+        return salt_pool
+
+    def estimate_entropy(self, salt):
+        # Estimate the entropy of the provided salt
+        num_possible_characters = len(self.characters)
+        entropy = math.log2(num_possible_characters) * len(salt)
+        return entropy
