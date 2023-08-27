@@ -190,4 +190,26 @@ class Passwords:
         
         
     
-        
+    def advancedPassword(self, alpha: str, length: int,  uppercase: bool, dual_cases: bool):
+        charList = []
+
+        for _ in range(length):
+          
+            char = random.choice(alpha)
+
+            if dual_cases:
+                # Randomly alternate between uppercase and lowercase characters
+                if random.choice([True, False]):
+                    char = char.upper()
+                else:
+                    char = char.lower()
+
+            charList.append(char)
+
+        password = "".join(charList)
+
+        # Convert key to uppercase if specified and not using dual cases
+        if uppercase and not dual_cases:
+            password = password.upper()
+
+        return password

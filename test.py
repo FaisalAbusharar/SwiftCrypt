@@ -37,4 +37,9 @@ keys_instance.securelyEraseData(data_to_erase)
 keys_instance = Passwords()
 
 password = keys_instance.generatePassword()
-print(password)
+advancedPassword = keys_instance.advancedPassword(
+    alpha="abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*+__--",
+                                  length=24,
+                                  uppercase=False,
+                                 dual_cases=True)
+
