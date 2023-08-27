@@ -150,4 +150,44 @@ class Passwords:
     def __init__(self):
         self.alphabet = list(string.ascii_lowercase)
         self.alphabet_numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+        self.alphabet_numbers_special = ["!","@","#","$","%","^","&","*"]
         self.alphabet_numbers.extend(self.alphabet)
+    
+        
+    def generatePassword(self, length=16, numbers=True, uppercase=True, speicalCharacters=True):
+        if speicalCharacters == True:
+            if numbers == True:
+                self.alphabet_numbers_special.extend(self.alphabet_numbers)
+            else:
+                self.alphabet_numbers_special.extend(self.alphabet)
+                
+            self.alphabet = self.alphabet_numbers_special
+        else:
+            self.alphabet = self.alphabet
+                
+        PassList = []
+        iteration = -1
+
+        for _ in range(length):
+            iteration += 1
+
+
+            alpha = self.alphabet
+            if numbers:
+                alpha = self.alphabet_numbers
+            if speicalCharacters:
+                alpha = self.alphabet_numbers_special
+
+            char = random.choice(alpha)
+            PassList.append(char)
+
+        password = "".join(PassList)
+
+        if uppercase:
+            password = password.upper()
+
+        return password
+        
+        
+    
+        

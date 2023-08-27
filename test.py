@@ -1,4 +1,4 @@
-from keys import Keys,dataTransform
+from keys import Keys,dataTransform, Passwords
 
 
 
@@ -34,4 +34,7 @@ data_to_erase = bytearray(b"Sensitive information to be erased.")
 keys_instance.securelyEraseData(data_to_erase)
 
 
-    
+keys_instance = Passwords()
+
+password = keys_instance.generatePassword()
+print(password)
