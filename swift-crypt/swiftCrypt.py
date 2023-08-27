@@ -193,19 +193,39 @@ class Checker:
         
         return password_strength
     
-    def verify_password(self, password, hashed_password, salt):
-        # Verify if a password matches a hashed password
-        try_hashed_password = hashlib.sha256(password.encode('utf-8') + salt.encode('utf-8')).hexdigest()
-        if try_hashed_password == hashed_password: return True
-        else: return False
+    def verify_password(self, password, hashed_password, salt, algorithm='sha256'):
+        # Verify if a password matches a hashed password using the specified algorithm
+        if algorithm.lower() not in hashlib.algorithms_available:
+            raise ValueError("Unsupported algorithm")
+
+        # Create a hashlib object for the chosen algorithm
+        hasher = hashlib.new(algorithm.lower())
+
+        # Hash the entered password with the same salt
+        password_salt_bytes = (password + salt).encode('utf-8')
+        hasher.update(password_salt_bytes)
+        try_hashed_password = hasher.hexdigest()
+
+        return try_hashed_password == hashed_password
 
 class Hash():
     def __init__(self):
         pass
 
-    def hash_password(self, password, salt):
+    def hash_password(self, password, salt, algorithm="sha256"):
             # Hash a password using a combination of hashlib algorithms
-            hashed_password = hashlib.sha256(password.encode('utf-8') + salt.encode('utf-8')).hexdigest()
+            
+            if algorithm.lower() not in hashlib.algorithms_available:
+                raise ValueError("Unsupported algorithm")
+
+        # Create a hashlib object for the chosen algorithm
+            hasher = hashlib.new(algorithm.lower())
+
+        # Hash the password and salt
+            password_salt_bytes = (password + salt).encode('utf-8')
+            hasher.update(password_salt_bytes)
+            hashed_password = hasher.hexdigest()
+            
             return hashed_password
                 
 
