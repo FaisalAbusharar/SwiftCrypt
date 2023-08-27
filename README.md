@@ -34,14 +34,55 @@ Install SwiftCrypt using `pip`:
 pip install swiftcrypt
 ```
 # Usage
-Here's a quick example of generating a secure password using SwiftCrypt:
+Here's a quick example of some of the features SwiftCrypt has.
 
 ```python
-from swiftcrypt import SecretGenerator
+from swiftcrypt import SecretGenerator, Checker, Hash, Salts, fileTransform
 
+# Create an instance of SecretGenerator
 generator = SecretGenerator()
+
+# Generate a secure password
 password = generator.generate_password(length=12, numbers=True, special_characters=True)
 print("Generated Password:", password)
+
+# Create an instance of Checker
+password_checker = Checker()
+
+# Check the strength of a password
+strength = password_checker.check_password_strength(password)
+print("Password Strength:", strength)
+
+# Create an instance of Hash
+hasher = Hash()
+
+# Hash a password with a salt
+salt = Salts().generate_salt()
+hashed_password = hasher.hash_password(password, salt)
+print("Hashed Password:", hashed_password)
+
+# Verify a password against a hashed password
+is_verified = password_checker.verify_password(password, hashed_password, salt)
+print("Password Verified:", is_verified)
+
+# Create an instance of Salts
+salts = Salts()
+
+# Generate a salt and estimate its entropy
+new_salt = salts.generate_salt()
+entropy = salts.estimate_entropy(new_salt)
+print("Generated Salt:", new_salt)
+print("Estimated Entropy:", entropy)
+
+# Create an instance of fileTransform
+file_transformer = fileTransform()
+
+# Encrypt a file
+file_transformer.encrypt_file("plaintext.txt", "encrypted.bin", password)
+
+# Decrypt the encrypted file
+file_transformer.decrypt_file("encrypted.bin", "decrypted.txt", password)
+
 ```
 Check out our documentation for more detailed instructions and examples.
 

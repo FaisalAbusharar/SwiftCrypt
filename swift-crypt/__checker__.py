@@ -15,8 +15,8 @@ print(strength)
     
 password, hashedPass, salt = __hash__.returnHash()
 
-"""verifiedPass-args: actual password, the hashed version, and the salt used.""" 
-verifiedPass = swiftCrypt.Checker().verify_password(password, hashedPass, salt)
+"""verifiedPass-args: actual password, the hashed version, and the salt used aswell as the algorithm.""" 
+verifiedPass = swiftCrypt.Checker().verify_password(password, hashedPass, salt,"sha256")
 if verifiedPass == True:
     print("Password is correct!")
 else:
