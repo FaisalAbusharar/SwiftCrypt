@@ -1,7 +1,7 @@
 
 # SwiftCrypt
 
-![SwiftCrypt Logo](swiftCrypt.png) <!-- Replace with your actual logo -->
+![SwiftCrypt Logo](./swiftCrypt.png) <!-- Replace with your actual logo -->
 
 **SwiftCrypt** is a versatile Python module that empowers your projects with a comprehensive suite of security utilities. From generating secrets to hashing passwords, SwiftCrypt simplifies complex security tasks, allowing you to focus on building secure applications.
 
