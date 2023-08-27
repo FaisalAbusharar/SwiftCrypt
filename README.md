@@ -23,7 +23,7 @@
 - **Data Transformation:** Encode and decode data with Base64 and hexadecimal. Securely erase sensitive data using random bytes.
 - **Advanced Generation:** Tailor key and password generation with options for uppercase, dual cases, and more.
 - **Password Strength Checker:** Evaluate password strength based on length, character types, and more.
-- **Password Hashing:** Hash passwords using the SHA-256 algorithm with advanced salting.
+- **Password Hashing:** Hash passwords using the any algorithm avaliable with advanced salting.
 - **Salt Generation:** Generate unique salts for enhanced password security.
 
 ## Installation
