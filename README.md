@@ -1,14 +1,18 @@
+<p align="center">
+  <img src="logo.png" alt="SwiftCrypt Logo">
+</p>
 
-# SwiftCrypt
+<h1 align="center">SwiftCrypt</h1>
 
-![SwiftCrypt Logo](./swiftCrypt.png) <!-- Replace with your actual logo -->
+<p align="center">
+  <b>Versatile Python module for enhanced security utilities</b>
+</p>
 
-**SwiftCrypt** is a versatile Python module that empowers your projects with a comprehensive suite of security utilities. From generating secrets to hashing passwords, SwiftCrypt simplifies complex security tasks, allowing you to focus on building secure applications.
-
-Wanna know the best part? made only with **core python libraries**!
-
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Latest Release](https://img.shields.io/github/release/VoidyCD/swiftcrypt.svg)](https://github.com/Tech-Tweaks/SwiftCrypt/releases)
+<p align="center">
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License"></a>
+  <a href="https://www.python.org/downloads/release"><img src="https://img.shields.io/badge/python-%3E%3D3.6-blue.svg" alt="Python Version"></a>
+  <a href="https://pypi.org/project/swiftcrypt/"><img src="https://img.shields.io/pypi/dm/swiftcrypt.svg" alt="PyPI Downloads"></a>
+</p>ases)
 [![Python Version](https://img.shields.io/badge/python-%3E%3D3.6-blue.svg)](https://www.python.org/downloads/release)
 
 ## Features
