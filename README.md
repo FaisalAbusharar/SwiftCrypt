@@ -88,6 +88,7 @@ Check out our documentation for more detailed instructions and examples.
 
 # Contribution
 We welcome contributions! If you encounter issues or want to enhance SwiftCrypt, please submit a pull request or open an issue.
+Discord: https://discord.gg/dtGT6qryUR
 
 # License
 SwiftCrypt is licensed under the MIT License.
