@@ -8,7 +8,7 @@
 Wanna know the best part? made only with **core python libraries**!
 
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Python Version](https://img.shields.io/badge/python-%3E%3D3.9-blue.svg)](https://www.python.org/downloads/release)
+[![Python Version](https://img.shields.io/badge/python-%3E%3D3.6-blue.svg)](https://www.python.org/downloads/release)
 
 ## Features
 
