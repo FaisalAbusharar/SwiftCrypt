@@ -18,9 +18,9 @@ You can easily install SwiftCrypt using pip:
 
 ```bash
 pip install swiftcrypt
-Usage
-python
-Copy code
+```
+# Usage
+```python
 # Import classes from the SwiftCrypt module
 from swiftcrypt import SecretGenerator, DataTransformer, Checker, Hash, Salts
 
@@ -50,16 +50,14 @@ hashed_password = hasher.hash_password(password, salt)
 # Generate and estimate entropy of salts
 generated_salt = salts.generate_salt()
 entropy_estimate = salts.estimate_entropy(generated_salt)
-Examples
+```
+# Examples
 For more detailed usage examples and documentation, please refer to the examples directory and the documentation.
 
-Contributing
+# Contributing
 Contributions are highly appreciated! Feel free to open issues and submit pull requests for bug fixes, enhancements, and new features.
 
-License
+ #License
 This project is licensed under the MIT License.
 
-vbnet
-Copy code
 
-Please remember to replace placeholders like `swiftcrypt`, `SwiftCrypt`, and paths
