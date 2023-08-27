@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.png" alt="SwiftCrypt Logo">
+  <img src="swiftcrypt.png" alt="SwiftCrypt Logo">
 </p>
 
 <h1 align="center">SwiftCrypt</h1>
