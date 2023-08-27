@@ -8,7 +8,7 @@
 Wanna know the best part? made only with **core python libraries**!
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Latest Release](https://img.shields.io/github/release/VoidyCD/swiftcrypt.svg)](https://github.com/VoidyCD/swiftcrypt/releases)
+[![Latest Release](https://img.shields.io/github/release/VoidyCD/swiftcrypt.svg)](https://github.com/Tech-Tweaks/SwiftCrypt/releases)
 [![Python Version](https://img.shields.io/badge/python-%3E%3D3.6-blue.svg)](https://www.python.org/downloads/release)
 
 ## Features
