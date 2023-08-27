@@ -14,7 +14,7 @@
   <a href="https://pypi.org/project/swiftcrypt/"><img src="https://img.shields.io/pypi/dm/swiftcrypt.svg" alt="PyPI Downloads"></a>
 </p>
 
-### Downloads isnt showing cuz its a new package for some reason?
+### Documentation isn't out yet. please check the 'swiftcrypt' folder, and each class has its own file explaning the functions!
 
 
 ## Features
