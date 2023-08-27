@@ -1,5 +1,6 @@
 import random
 import string
+import hashlib
 import uuid
 import base64
 import secrets
@@ -173,5 +174,25 @@ class Checker:
 
         if return_codes != False: return 0
         return "Strong: Password meets the strength criteria."
+    
+    def verify_password(self, password, hashed_password, salt):
+        # Verify if a password matches a hashed password
+        try_hashed_password = hashlib.sha256(password.encode('utf-8') + salt.encode('utf-8')).hexdigest()
+        if try_hashed_password == hashed_password: return True
+        else: return False
 
+class Hash():
+    def __init__(self):
+        pass
+    
+    def generate_salt(self,salt_length=16):
+            # Generate a random salt
+            characters = string.ascii_letters + string.digits
+            salt = ''.join(random.choice(characters) for _ in range(salt_length))
+            return salt
 
+    def hash_password(self, password, salt):
+            # Hash a password using a combination of hashlib algorithms
+            hashed_password = hashlib.sha256(password.encode('utf-8') + salt.encode('utf-8')).hexdigest()
+            return hashed_password
+                

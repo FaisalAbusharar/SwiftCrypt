@@ -1,5 +1,5 @@
 import swiftCrypt
-
+import __hash__
 
 password = "1pWS$swoRdw4@cW@$"
 
@@ -23,3 +23,10 @@ if strength == 0:
     print("Strong password detected.")
 else:
     print(f"Weak Password, err code: {strength}")
+    
+    
+password, hashedPass, salt = __hash__.returnHash()
+
+"""verifiedPass-args: actual password, the hashed version, and the salt used.""" 
+verifiedPass = swiftCrypt.Checker().verify_password(password, hashedPass, salt)
+print(verifiedPass)                             
