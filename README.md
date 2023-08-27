@@ -12,8 +12,8 @@
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License"></a>
   <a href="https://www.python.org/downloads/release"><img src="https://img.shields.io/badge/python-%3E%3D3.6-blue.svg" alt="Python Version"></a>
   <a href="https://pypi.org/project/swiftcrypt/"><img src="https://img.shields.io/pypi/dm/swiftcrypt.svg" alt="PyPI Downloads"></a>
-</p>ases)
-[![Python Version](https://img.shields.io/badge/python-%3E%3D3.6-blue.svg)](https://www.python.org/downloads/release)
+</p>)
+
 
 ## Features
 
