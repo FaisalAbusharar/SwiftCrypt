@@ -4,7 +4,8 @@
 ![SwiftCrypt Logo](swiftCrypt.png) <!-- Replace with your actual logo -->
 
 **SwiftCrypt** is a versatile Python module that empowers your projects with a comprehensive suite of security utilities. From generating secrets to hashing passwords, SwiftCrypt simplifies complex security tasks, allowing you to focus on building secure applications.
-Wanna know the best part? made only with core python libraries!
+
+Wanna know the best part? made only with **core python libraries**!
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python Version](https://img.shields.io/badge/python-%3E%3D3.6-blue.svg)](https://www.python.org/downloads/release)
