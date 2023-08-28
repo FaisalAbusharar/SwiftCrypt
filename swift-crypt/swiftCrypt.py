@@ -474,3 +474,5 @@ class DigitalSignature:
             return True
         except:
             return False
+        
+# for some reason pypi wont recognize the new changes.
