@@ -4,14 +4,8 @@ import uuid
 import base64
 import secrets
 import math
-import os
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from cryptography.hazmat.primitives import padding
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.backends import default_backend
+import bcrypt
+from cryptography.fernet import Fernet
 
 
 class SecretGenerator:
@@ -249,50 +243,49 @@ class Salts:
         entropy = math.log2(num_possible_characters) * len(salt)
         return entropy
     
-class fileTransform():
-    def __init__(self) -> None:
+    
+    
+
+
+class AdvancedFileTransform:
+    def __init__(self):
         pass
-    def generate_key(self, salt, password, length=32):
-        kdf = PBKDF2HMAC(
-            algorithm=hashes.SHA256(),
-            iterations=100000,
-            salt=salt,
-            length=length,
-            backend=default_backend()
-        )
-        key = kdf.derive(password.encode('utf-8'))
-        return key
+
+    def generate_key(self, password):
+        # Generate a salt for bcrypt
+        salt = bcrypt.gensalt()
+
+        # Hash the password using bcrypt
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+
+        return hashed_password
 
     def encrypt_file(self, input_file, output_file, password):
-        salt = os.urandom(16)
-        key = self.generate_key(salt, password)
-        iv = os.urandom(16)
-
-        cipher = Cipher(algorithms.AES(key), modes.CFB(iv), backend=default_backend())
-        encryptor = cipher.encryptor()
+        key = self.generate_key(password)
+        fernet_key = Fernet.generate_key()
+        fernet = Fernet(fernet_key)
 
         with open(input_file, 'rb') as f:
             plaintext = f.read()
 
-        ciphertext = encryptor.update(plaintext) + encryptor.finalize()
+        ciphertext = fernet.encrypt(plaintext)
 
         with open(output_file, 'wb') as f:
-            f.write(salt)
-            f.write(iv)
+            f.write(key)
+            f.write(fernet_key)
             f.write(ciphertext)
 
     def decrypt_file(self, input_file, output_file, password):
         with open(input_file, 'rb') as f:
-            salt = f.read(16)
-            iv = f.read(16)
+            key = f.read(60)  # bcrypt hash
+            fernet_key = f.read(32)  # Fernet key
             ciphertext = f.read()
 
-        key = self.generate_key(salt, password)
+        if bcrypt.checkpw(password.encode('utf-8'), key):
+            fernet = Fernet(fernet_key)
+            plaintext = fernet.decrypt(ciphertext)
 
-        cipher = Cipher(algorithms.AES(key), modes.CFB(iv), backend=default_backend())
-        decryptor = cipher.decryptor()
-
-        plaintext = decryptor.update(ciphertext) + decryptor.finalize()
-
-        with open(output_file, 'wb') as f:
-            f.write(plaintext)
+            with open(output_file, 'wb') as f:
+                f.write(plaintext)
+        else:
+            raise ValueError("Incorrect password")
