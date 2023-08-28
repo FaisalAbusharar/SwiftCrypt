@@ -12,6 +12,7 @@
   <a href="https://pypi.org/project/swiftcrypt/"><img src="https://img.shields.io/pypi/status/swiftcrypt" alt="Status"></a>
   <a href="https://www.python.org/downloads/release"><img src="https://img.shields.io/pypi/pyversions/swiftcrypt" alt="Python Version"></a>
   <a href="https://pypi.org/project/swiftcrypt/"><img src="https://img.shields.io/pypi/v/swiftcrypt" alt="Version"></a>
+  <a href="https://pypi.org/project/swiftcrypt/"><img src="https://img.shields.io/pypi/dw/swiftcrypt" alt="Downloads"></a>
 </p>
 
 ### Documentation isn't out yet. please check the 'swiftcrypt' folder, and each class has its own file explaning the functions!
