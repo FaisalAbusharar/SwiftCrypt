@@ -1,11 +1,15 @@
 <p align="center">
-  <img src="swiftCrypt.png" alt="SwiftCrypt Logo">
+  <img src="https://raw.githubusercontent.com/Tech-Tweaks/SwiftCrypt/main/swiftCrypt.png" alt="SwiftCrypt Logo">
 </p>
 
 <h1 align="center">SwiftCrypt</h1>
 
 <p align="center">
-  <b>Versatile Python module for enhanced security utilities</b>
+  <b>>A Versatile Python module to streamline security tasks, allowing you to concentrate on your core program</b>
+</p>
+
+<p align="center">
+  <b>>Please note: this isn't some new top-notch security, it simply reduces the amount of work you need to put in for security, so you can focus on your actual program!</b>
 </p>
 
 <p align="center">
@@ -15,7 +19,7 @@
   <a href="https://pypi.org/project/swiftcrypt/"><img src="https://img.shields.io/pypi/dw/swiftcrypt" alt="Downloads"></a>
 </p>
 
-### Documentation isn't out yet. please check the 'swiftcrypt' folder, and each class has its own file explaning the functions!
+#### Documentation isn't out yet. please check the 'swiftcrypt' folder, and each class has its own file explaning the functions!
 
 
 ## Features
@@ -121,5 +125,5 @@ Discord: https://discord.gg/dtGT6qryUR
 # License
 SwiftCrypt is licensed under the MIT License.
 
-Feel free to use SwiftCrypt in your projects and enjoy a safer development experience! If you have any questions or need assistance, please don't hesitate to reach out.
+Feel free to integrate SwiftCrypt into your projects to simplify security tasks and focus on your core development. If you have queries or need assistance, do not hesitate to get in touch.
 
