@@ -9,6 +9,8 @@ import qrcode
 from cryptography.fernet import Fernet
 import pyotp
 import smtplib
+import socket
+import requests
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
@@ -300,7 +302,6 @@ class AdvancedFileTransform:
 
 
 
-
 class TwoFactorAuth:
     def generate_secret_key(self):
         # Generate a secret key for the user
@@ -374,21 +375,40 @@ class TwoFactorAuth:
         # Print the base64-encoded image
         print(base64_qr_code)
 
+
 class RateLimiter:
-    def __init__(self, cooldown_duration=60):
-        self.cooldown_duration = cooldown_duration
+    def __init__(self):
         self.failed_attempts = {}  # Store failed login attempts with timestamps
 
-    def check_rate_limit(self, user_id, max_attempts=5):
-        if user_id in self.failed_attempts:
-            attempts, last_attempt_time = self.failed_attempts[user_id]
-            if attempts >= max_attempts and time.time() - last_attempt_time < self.cooldown_duration:
+    def check_rate_limit(self, user_id, ip_address=None, max_attempts=5,
+                         cooldown_duration=60):
+        if ip_address == None:
+            combined_key = {user_id}
+        else:
+            combined_key = f"{user_id}_{ip_address}"
+
+        if combined_key in self.failed_attempts:
+            attempts, last_attempt_time = self.failed_attempts[combined_key]
+            if attempts >= max_attempts and time.time() - last_attempt_time < cooldown_duration:
                 return False  # Rate limit exceeded
         return True
 
-    def record_failed_attempt(self, user_id):
-        if user_id in self.failed_attempts:
-            attempts, _ = self.failed_attempts[user_id]
-            self.failed_attempts[user_id] = (attempts + 1, time.time())
+    def record_failed_attempt(self, combined_key):
+      
+
+        if combined_key in self.failed_attempts:
+            attempts, _ = self.failed_attempts[combined_key]
+            self.failed_attempts[combined_key] = (attempts + 1, time.time())
         else:
-            self.failed_attempts[user_id] = (1, time.time())
+            self.failed_attempts[combined_key] = (1, time.time())
+
+
+def returnIp(mode=None):
+    url = 'https://api.ipify.org'
+    response = requests.get(url)
+    ip_address = response.text
+    hostname = socket.gethostname()
+    if mode == None:
+        return hostname, ip_address
+    elif mode == "ip":
+        return ip_address

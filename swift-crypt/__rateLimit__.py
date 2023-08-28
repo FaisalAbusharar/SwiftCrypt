@@ -1,4 +1,4 @@
-from swiftCrypt import RateLimiter
+from swiftCrypt import RateLimiter, returnIp
 
 
 limiter = RateLimiter()
@@ -7,25 +7,39 @@ limiter = RateLimiter()
 login_successful = False
 """wheather the login is correct or not"""
 
-user_id = "user123"
-"""the user_id is how we check how many attempts have been made."""
+hostname, ip = returnIp()
+"""returns the IP of the user aswell as the hostname."""
+combined_key = f"{hostname}_{ip}"
+"""Create a key, which is a mix of the hostname & ip"""
 
 while True:
-    if not limiter.check_rate_limit(user_id,6):
+    if not limiter.check_rate_limit(hostname,ip,max_attempts=6,cooldown_duration=50):
             
 #? The check_rate_limit function returns a bool.
 #* if it returns True that means the user still has attempts left.
 #! if it returns false that means the user has reached the limit.
+#% IP is Optional, in this case we use it.
             
             print("Rate limit exceeded. Try again later.")
             break
     if login_successful:
-        if user_id in limiter.failed_attempts:
+        if combined_key in limiter.failed_attempts:
             #@ If the login is successful, we will reset the attempts.
-            del limiter.failed_attempts[user_id]  # Reset failed attempts if login successful
+            del limiter.failed_attempts[combined_key]  # Reset failed attempts if login successful
     else:
         """if the login is not successful, we will add subtract from
             attempts left"""
-        limiter.record_failed_attempt(user_id)
+        limiter.record_failed_attempt(combined_key)
         print("attempted login")
         
+"""
+Expected output:
+attempted login
+attempted login
+attempted login
+attempted login
+attempted login
+attempted login
+Rate limit exceeded. Try again later.
+
+"""

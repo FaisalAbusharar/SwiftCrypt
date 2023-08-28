@@ -44,7 +44,7 @@ pip install swiftcrypt
 Here's a quick example of some of the features SwiftCrypt has.
 
 ```python
-from swiftcrypt import SecretGenerator, Checker, Hash, Salts, fileTransform
+from swiftcrypt import SecretGenerator, Checker, Hash, Salts, fileTransform, rateLimiter
 
 # Create an instance of SecretGenerator
 generator = SecretGenerator()
@@ -89,6 +89,22 @@ file_transformer.encrypt_file("plaintext.txt", "encrypted.bin", password)
 
 # Decrypt the encrypted file
 file_transformer.decrypt_file("encrypted.bin", "decrypted.txt", password)
+
+# Create an instance of RateLimiter
+rate_limiter = RateLimiter()
+
+# Simulate a login attempt and rate limiting
+user_id = "user123"
+ip_address = "123.456.789.0"
+
+if rate_limiter.check_rate_limit(user_id, ip_address):
+    print("Login allowed.")
+    # Perform the login logic here
+    # ...
+else:
+    print("Rate limit exceeded. Please wait before trying again.")
+    rate_limiter.record_failed_attempt(f"{user_id}_{ip_address}")
+
 
 ```
 
