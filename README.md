@@ -26,6 +26,8 @@
 - **Password Strength Checker:** Evaluate password strength based on length, character types, and more.
 - **Password Hashing:** Hash passwords using the any algorithm avaliable with advanced salting.
 - **Salt Generation:** Generate unique salts for enhanced password security.
+- **Two-Factor Authentication (2FA):** Generate QR codes for 2FA setup, verify TOTP codes, and send QR codes via email.
+
 
 ## Installation
 
@@ -85,6 +87,30 @@ file_transformer.encrypt_file("plaintext.txt", "encrypted.bin", password)
 file_transformer.decrypt_file("encrypted.bin", "decrypted.txt", password)
 
 ```
+
+# Using the new 2FA
+
+```python
+
+from swiftcrypt import TwoFactorAuth
+
+two_factor_auth = TwoFactorAuth()
+
+# Generate a secret key for 2FA
+user_secret_key = two_factor_auth.generate_secret_key()
+
+# Generate a QR code image for 2FA setup
+user_qr_code = two_factor_auth.generate_qr_code(user_secret_key, "user@example.com")
+
+# Send the QR code via email
+two_factor_auth.send_qr_code_email(user_qr_code, "user@example.com", "your_email@gmail.com", "your_email_password")
+
+# Print the QR code as a base64-encoded string
+two_factor_auth.generate_qr_code_and_print("user@example.com")
+```
+
+
+
 Check out our documentation for more detailed instructions and examples. [COMING SOON]
 
 # Contribution
