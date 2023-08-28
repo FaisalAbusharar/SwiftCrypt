@@ -28,9 +28,12 @@
 - **Data Transformation:** Encode and decode data with Base64 and hexadecimal. Securely erase sensitive data using random bytes.
 - **Advanced Generation:** Tailor key and password generation with options for uppercase, dual cases, and more.
 - **Password Strength Checker:** Evaluate password strength based on length, character types, and more.
-- **Password Hashing:** Hash passwords using the any algorithm avaliable with advanced salting.
+- **Password Hashing:** Hash passwords using any algorithm available with advanced salting.
 - **Salt Generation:** Generate unique salts for enhanced password security.
 - **Two-Factor Authentication (2FA):** Generate QR codes for 2FA setup, verify TOTP codes, and send QR codes via email.
+- **Digital Signature:** Create and verify digital signatures for message authenticity and integrity.
+- **Data Masking:** Mask sensitive data such as passwords to enhance security.
+
 
 
 ## Installation
@@ -104,6 +107,30 @@ if rate_limiter.check_rate_limit(user_id, ip_address):
 else:
     print("Rate limit exceeded. Please wait before trying again.")
     rate_limiter.record_failed_attempt(f"{user_id}_{ip_address}")
+
+# Create an instance of DataMasking
+data_masker = DataMasking()
+
+# Mask sensitive data, such as passwords, to enhance security
+original_text = "HelloGuyswelcomeback"
+masked_text = data_masker.mask_data(original_text, masking_character="*", chars_to_mask=4)
+print("Original Text:", original_text)
+print("Masked Text:", masked_text)
+
+# Create an instance of DigitalSignature
+digital_signature = DigitalSignature()
+
+# Generate an RSA key pair
+private_key, public_key = digital_signature.generate_key_pair()
+
+# Define the message to be signed
+message = b"Hello, this is a message."
+
+# Sign the message using the private key
+signature = digital_signature.sign_message(private_key, message)
+
+# Verify the signature using the public key and the original message
+verification_result = digital_signature.verify_signature(public_key, message, signature)
 
 
 ```

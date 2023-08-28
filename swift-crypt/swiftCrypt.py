@@ -10,6 +10,11 @@ from cryptography.fernet import Fernet
 import pyotp
 import smtplib
 import socket
+import re
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives.asymmetric import rsa
 import requests
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -412,3 +417,60 @@ def returnIp(mode=None):
         return hostname, ip_address
     elif mode == "ip":
         return ip_address
+    
+    
+class DataMasking:
+    def __init__(self):
+        pass
+    
+    def mask_data(self, text, masking_character="*", chars_to_mask=4):
+        masked_text = re.sub(r'[a-zA-Z0-9]{%d}' % chars_to_mask, masking_character * chars_to_mask, text)
+        return masked_text
+            
+    def credit_card_mask(self,text,masking_character="*"):
+        try:
+            int(text)
+        except:
+            raise ValueError("credit_card_mask function only takes numbers.")
+        
+        return( (len(text) - 3) * masking_character + text[-3:])
+        
+        
+class DigitalSignature:
+    def __init__(self):
+        pass
+    
+    def generate_key_pair(self):
+        private_key = rsa.generate_private_key(
+            public_exponent=65537,
+            key_size=2048,
+            backend=default_backend()
+        )
+        public_key = private_key.public_key()
+        return private_key, public_key
+    
+    def sign_message(self, private_key, message):
+        signature = private_key.sign(
+            message,
+            padding.PSS(
+                mgf=padding.MGF1(hashes.SHA256()),
+                salt_length=padding.PSS.MAX_LENGTH
+            ),
+            hashes.SHA256()
+        )
+        return signature
+    
+    def verify_signature(self, public_key, message, signature):
+        try:
+            public_key.verify(
+                signature,
+                message,
+                padding.PSS(
+                    mgf=padding.MGF1(hashes.SHA256()),
+                    salt_length=padding.PSS.MAX_LENGTH
+                ),
+                hashes.SHA256()
+            )
+            return True
+        except:
+            return False

@@ -1,0 +1,6 @@
+cryptography==41.0.3
+pyotp==2.9.0
+python_bcrypt==0.3.2
+qrcode==7.4.2
+Requests==2.31.0
+setuptools==65.5.0

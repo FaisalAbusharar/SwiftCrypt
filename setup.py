@@ -7,7 +7,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
-VERSION = '0.0.5'
+VERSION = '0.1.0'
 DESCRIPTION = 'Swiftly Secure your Apps'
 LONG_DESCRIPTION = 'Secure your python applications swiftly using SwiftCrypt'
 
@@ -21,7 +21,7 @@ setup(
     long_description_content_type="text/markdown",
     long_description=long_description,
     packages=find_packages(),
-    install_requires=["bcrypt", "pyotp", "qrcode"],
+    install_requires=["python_bcrypt==0.32", "pyotp==2.9.0", "qrcode==7.4.2", "cryptography==41.0.3"],
     keywords=['keys', 'passwords', 'crypting', 'encoding', 'secure', 'uuid'],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -34,3 +34,4 @@ setup(
         "Operating System :: Microsoft :: Windows",
     ]
 )
+
