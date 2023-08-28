@@ -1,4 +1,4 @@
-from swiftCrypt import RateLimiter, returnIp
+from swiftcrypt import RateLimiter, returnIp
 
 
 limiter = RateLimiter()

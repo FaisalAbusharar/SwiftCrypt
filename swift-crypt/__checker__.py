@@ -1,4 +1,4 @@
-import swiftCrypt
+import swiftcrypt
 import __hash__
 
 password = "551pWS$swdW$#do@$"

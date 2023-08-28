@@ -1,4 +1,4 @@
-import swiftCrypt
+import swiftcrypt
 
 password= "SwiftCrypt"
 

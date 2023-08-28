@@ -1,4 +1,4 @@
-from swiftCrypt import DigitalSignature
+from swiftcrypt import DigitalSignature
 
 # Create an instance of the DigitalSignature class
 digital_signature = DigitalSignature()
