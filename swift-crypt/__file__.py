@@ -1,4 +1,4 @@
-from swiftcrypt import fileTransform 
+from sswiftcrypt import fileTransform 
 
 
 swift_crypt = fileTransform()

@@ -7,9 +7,9 @@ here = os.path.abspath(os.path.dirname(__file__))
 with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
-VERSION = '0.1.4.2'
+VERSION = '0.1.4.3'
 DESCRIPTION = 'Swiftly Secure your Apps'
-LONG_DESCRIPTION = 'Secure your python applications swiftly using SwiftCrypt'
+LONG_DESCRIPTION = long_description
 
 # Setting up
 setup(

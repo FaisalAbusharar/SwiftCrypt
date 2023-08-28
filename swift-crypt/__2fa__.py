@@ -1,4 +1,4 @@
-from swiftcrypt import TwoFactorAuth
+from swiftCrypt import TwoFactorAuth
 
 """This line imports the TwoFactorAuth class from the swiftCrypt module. This class is responsible for handling two-factor authentication (2FA) operations."""
 

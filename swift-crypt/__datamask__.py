@@ -1,4 +1,4 @@
-from swiftcrypt import DataMasking
+from swiftCrypt import DataMasking
 
 data_masker = DataMasking()
 
