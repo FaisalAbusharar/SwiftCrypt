@@ -31,6 +31,7 @@
 - **Password Hashing:** Hash passwords using any algorithm available with advanced salting.
 - **Salt Generation:** Generate unique salts for enhanced password security.
 - **Two-Factor Authentication (2FA):** Generate QR codes for 2FA setup, verify TOTP codes, and send QR codes via email.
+- **Rate Limiting:** Prevent abuse by implementing rate limiting for actions like login attempts.
 - **Digital Signature:** Create and verify digital signatures for message authenticity and integrity.
 - **Data Masking:** Mask sensitive data such as passwords to enhance security.
 
