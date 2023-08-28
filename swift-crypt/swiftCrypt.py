@@ -5,7 +5,14 @@ import base64
 import secrets
 import math
 import bcrypt
+import qrcode
 from cryptography.fernet import Fernet
+import pyotp
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+from io import BytesIO
 
 
 class SecretGenerator:
@@ -289,3 +296,79 @@ class AdvancedFileTransform:
                 f.write(plaintext)
         else:
             raise ValueError("Incorrect password")
+
+
+
+
+class TwoFactorAuth:
+    def generate_secret_key(self):
+        # Generate a secret key for the user
+        return pyotp.random_base32()
+
+    def generate_qr_code(self, secret_key, username):
+        # Generate a URL for the QR code
+        totp = pyotp.TOTP(secret_key, interval=30)
+        url = totp.provisioning_uri(username, issuer_name="SwiftCrypt")
+
+        # Return the URL to generate a QR code
+        return url
+
+    def verify_2fa_code(self, secret_key, code):
+        # Verify the TOTP code
+        totp = pyotp.TOTP(secret_key, interval=30)
+        return totp.verify(code)
+    
+    
+    def generate_qr_code(self, secret_key, username,issuer_name="SwiftCrypt"):
+        # Generate a URL for the QR code
+        totp = pyotp.TOTP(secret_key, interval=30)
+        url = totp.provisioning_uri(username, issuer_name=issuer_name)
+
+        # Generate a QR code image
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(url)
+        qr.make(fit=True)
+        qr_img = qr.make_image(fill_color="black", back_color="white")
+
+        # Create an in-memory buffer to store the image
+        img_buffer = BytesIO()
+        qr_img.save(img_buffer, format="PNG")
+        img_buffer.seek(0)
+
+        # Return the image buffer
+        return img_buffer
+
+    def send_qr_code_email(self, qr_img, user_email,server_email,server_login):
+        # Send the QR code image via email
+       
+        to_email = user_email
+
+        msg = MIMEMultipart()
+        msg['From'] = server_email
+        msg['To'] = to_email
+        msg['Subject'] = "Your 2FA QR Code"
+
+        msg.attach(MIMEImage(qr_img.getvalue(), name="qrcode.png"))
+
+        # Setup the SMTP server and send the email
+        smtp_server = smtplib.SMTP('smtp.gmail.com', 587)
+        smtp_server.starttls()
+        smtp_server.login(server_email, server_login)
+        smtp_server.sendmail(server_email, to_email, msg.as_string())
+        smtp_server.quit()
+
+
+    def generate_qr_code_and_print(self, user_email):
+        user_secret_key = self.generate_secret_key()
+        user_qr_code = self.generate_qr_code(user_secret_key, user_email)
+        
+        # Convert the image buffer to a base64-encoded string
+        base64_qr_code = base64.b64encode(user_qr_code.getvalue()).decode('utf-8')
+        
+        # Print the base64-encoded image
+        print(base64_qr_code)

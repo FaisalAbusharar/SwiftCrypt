@@ -85,10 +85,11 @@ file_transformer.encrypt_file("plaintext.txt", "encrypted.bin", password)
 file_transformer.decrypt_file("encrypted.bin", "decrypted.txt", password)
 
 ```
-Check out our documentation for more detailed instructions and examples.
+Check out our documentation for more detailed instructions and examples. [COMING SOON]
 
 # Contribution
 We welcome contributions! If you encounter issues or want to enhance SwiftCrypt, please submit a pull request or open an issue.
+
 Discord: https://discord.gg/dtGT6qryUR
 
 # License
