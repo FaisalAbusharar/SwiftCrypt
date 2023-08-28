@@ -1,7 +1,7 @@
 import swiftCrypt
 import __hash__
 
-password = "1pWS$swo@$"
+password = "551pWS$swdW$#do@$"
 
 
 """check_password_strength-args: actual password, the min length, min uppercases, min lowercases, min numbers, min speicals and if messages should be returned."""

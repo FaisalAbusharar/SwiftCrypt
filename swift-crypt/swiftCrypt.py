@@ -1,4 +1,3 @@
-import random
 import string
 import hashlib
 import uuid
@@ -24,7 +23,7 @@ class SecretGenerator:
 
     def generate_random_chars(self, alpha, length):
         # Generate a list of random characters from the given character set
-        return [random.choice(alpha) for _ in range(length)]
+        return [secrets.choice(alpha) for _ in range(length)]
 
     def generate_key(self, length=24, numbers=True, dashes=True, dash_range=6, uppercase=True):
         alpha = self.alphabet_numbers + self.alphabet_lowercase
@@ -42,7 +41,7 @@ class SecretGenerator:
                 key_list.append("-")
                 iteration = 0
 
-            char = random.choice(alpha)
+            char = secrets.choice(alpha)
             key_list.append(char)
 
         key = "".join(key_list)
@@ -68,7 +67,7 @@ class SecretGenerator:
         password_list = self.generate_random_chars(alpha, length)
 
         if uppercase:
-            password_list = [char.upper() if random.choice([True, False]) else char for char in password_list]
+            password_list = [char.upper() if secrets.choice([True, False]) else char for char in password_list]
 
         return "".join(password_list)
 
@@ -120,10 +119,10 @@ class AdvancedGenerator:
                 key_list.append("-")
                 iteration = 0
 
-            char = random.choice(alpha)
+            char = secrets.choice(alpha)
 
             if dual_cases:
-                char = char.upper() if random.choice([True, False]) else char.lower()
+                char = char.upper() if secrets.choice([True, False]) else char.lower()
 
             key_list.append(char)
 
@@ -138,10 +137,10 @@ class AdvancedGenerator:
         char_list = []
 
         for _ in range(length):
-            char = random.choice(alpha)
+            char = secrets.choice(alpha)
 
             if dual_cases:
-                char = char.upper() if random.choice([True, False]) else char.lower()
+                char = char.upper() if secrets.choice([True, False]) else char.lower()
 
             char_list.append(char)
 
@@ -235,9 +234,9 @@ class Salts:
 
     def generate_salt(self, salt_length=None):
         if salt_length is None:
-            salt_length = random.randint(10, 30)
+            salt_length = secrets.randint(10, 30)
 
-        salt = ''.join(random.choice(self.characters) for _ in range(salt_length))
+        salt = ''.join(secrets.choice(self.characters) for _ in range(salt_length))
         return salt
 
     def generate_pool(self, pool_size: int, salt_length=None):
