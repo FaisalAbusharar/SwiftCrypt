@@ -5,11 +5,11 @@
 <h1 align="center">SwiftCrypt</h1>
 
 <p align="center">
-  <b>>A Versatile Python module to streamline security tasks, allowing you to concentrate on your core program</b>
+  <b>A Versatile Python module to streamline security tasks, allowing you to concentrate on your core program</b>
 </p>
 
 <p align="center">
-  <b>>Please note: this isn't some new top-notch security, it simply reduces the amount of work you need to put in for security, so you can focus on your actual program!</b>
+  <b>Please note: this isn't some new top-notch security, it simply reduces the amount of work you need to put in for security, so you can focus on your actual program!</b>
 </p>
 
 <p align="center">
