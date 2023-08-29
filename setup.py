@@ -7,7 +7,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
-VERSION = '0.1.4.8'
+VERSION = '0.2.4.8'
 DESCRIPTION = 'Swiftly Secure your Apps'
 LONG_DESCRIPTION = long_description
 
