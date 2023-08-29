@@ -23,6 +23,8 @@ jobs:
     - name: Update version in setup.py
       run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py
     - name: Build a binary wheel
-      run: python setup.py sdist bdist_wheel
+      run: | 
+        python setup.py sdist bdist_wheel
+        pip install twine
     - name: Publish distribution 📦 to PyPI
       run: twine upload dist/* --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}
