@@ -35,6 +35,9 @@
 - **Digital Signature:** Create and verify digital signatures for message authenticity and integrity.
 - **Data Masking:** Mask sensitive data such as passwords to enhance security.
 - **SecureInputHandler:** This class handles secure database queries, including creating tables, retrieving user information, and executing queries securely.
+- **CGSR (Cryptographically:** Secure Random): This class provides a method to generate cryptographically secure random bytes, which can be crucial for creating secure tokens, keys, and other sensitive data.
+- **SecureSecretStorage:** This class provides a way to securely store and retrieve secrets, such as usernames and passwords, using the keyring library.
+- **SecureSessionManager:** This class manages user sessions securely, creating, validating, and ending sessions while keeping track of timestamps.
 
 
 ## Installation
