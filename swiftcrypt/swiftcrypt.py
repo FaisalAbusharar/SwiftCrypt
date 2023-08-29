@@ -19,6 +19,7 @@ import requests
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
+import sqlite3
 from io import BytesIO
 import time
 
@@ -476,3 +477,57 @@ class DigitalSignature:
             return False
         
 # for some reason pypi wont recognize the new changes.
+class SecureInputHandler:
+    def __init__(self, db_path):
+        self.conn = sqlite3.connect(db_path)
+        self.cursor = self.conn.cursor()
+
+     
+       
+
+    def execute_secure_query(self, query, params=None):
+        try:
+            if params:
+                self.cursor.execute(query, params)
+            else:
+                self.cursor.execute(query)
+            
+            self.conn.commit()
+            return True
+        except sqlite3.Error as e:
+            print("Error executing query:", e)
+            self.conn.rollback()
+            return False
+        
+   
+        
+    def create_table(self, table="users"):
+        print("Creating table:", table)
+        create_table_query = f"""
+        CREATE TABLE IF NOT EXISTS {table} (
+            id INTEGER PRIMARY KEY,
+            username TEXT NOT NULL,
+            password TEXT NOT NULL
+        )
+        """
+        try:
+            self.cursor.execute(create_table_query)
+            self.conn.commit()
+            print("Table created successfully.")
+        except sqlite3.Error as e:
+            print("Error creating table:", e)
+            self.conn.rollback()
+            
+    def get_user_info(self, username, table="users"):
+        query = f"SELECT * FROM {table} WHERE username = ?"
+        params = (username,)
+        
+        self.cursor.execute(query, params)
+        user_info = self.cursor.fetchone()  # Retrieve the first matching row
+        
+        return user_info
+
+
+    def close_connection(self):
+        self.conn.close()
+

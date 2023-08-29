@@ -34,7 +34,7 @@
 - **Rate Limiting:** Prevent abuse by implementing rate limiting for actions like login attempts.
 - **Digital Signature:** Create and verify digital signatures for message authenticity and integrity.
 - **Data Masking:** Mask sensitive data such as passwords to enhance security.
-
+- **SecureInputHandler:** This class handles secure database queries, including creating tables, retrieving user information, and executing queries securely.
 
 
 ## Installation
@@ -76,14 +76,7 @@ print("Hashed Password:", hashed_password)
 is_verified = password_checker.verify_password(password, hashed_password, salt)
 print("Password Verified:", is_verified)
 
-# Create an instance of Salts
-salts = Salts()
 
-# Generate a salt and estimate its entropy
-new_salt = salts.generate_salt()
-entropy = salts.estimate_entropy(new_salt)
-print("Generated Salt:", new_salt)
-print("Estimated Entropy:", entropy)
 
 # Create an instance of fileTransform
 file_transformer = fileTransform()
@@ -94,20 +87,6 @@ file_transformer.encrypt_file("plaintext.txt", "encrypted.bin", password)
 # Decrypt the encrypted file
 file_transformer.decrypt_file("encrypted.bin", "decrypted.txt", password)
 
-# Create an instance of RateLimiter
-rate_limiter = RateLimiter()
-
-# Simulate a login attempt and rate limiting
-user_id = "user123"
-ip_address = "123.456.789.0"
-
-if rate_limiter.check_rate_limit(user_id, ip_address):
-    print("Login allowed.")
-    # Perform the login logic here
-    # ...
-else:
-    print("Rate limit exceeded. Please wait before trying again.")
-    rate_limiter.record_failed_attempt(f"{user_id}_{ip_address}")
 
 # Create an instance of DataMasking
 data_masker = DataMasking()
