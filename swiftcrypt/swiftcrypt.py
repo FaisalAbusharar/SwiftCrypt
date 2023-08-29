@@ -643,3 +643,48 @@ class SecureSessionManager:
         """
         if session_token in self.sessions:
             del self.sessions[session_token]
+
+class SecureFileHandler:
+    def __init__(self, encryption_key):
+        self.encryption_key = encryption_key
+        self.fernet = Fernet(self.encryption_key)
+        
+
+    def encrypt_and_upload_file(self, input_file, output_file):
+        with open(input_file, 'rb') as f:
+            plaintext = f.read()
+
+
+        ciphertext = self.fernet.encrypt(plaintext)
+  
+       
+        # Calculate a hash of the ciphertext for integrity verification
+        hash_value = hashlib.sha256(plaintext).hexdigest()
+
+        with open(output_file, 'wb') as f:
+            f.write(ciphertext)
+
+        return hash_value
+
+    def download_and_decrypt_file(self, input_file, output_file, expected_hash):
+        with open(input_file, 'rb') as f:
+            ciphertext = f.read()
+            
+
+        plaintext = self.fernet.decrypt(ciphertext)
+      
+        
+   
+
+        # Calculate a hash of the decrypted plaintext for integrity verification
+        calculated_hash = hashlib.sha256(plaintext).hexdigest()
+        
+
+        if calculated_hash != expected_hash:
+            raise ValueError("Integrity check failed. The file might be tampered.")
+
+        with open(output_file, 'wb') as f:
+            f.write(plaintext)
+            
+            
+

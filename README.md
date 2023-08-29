@@ -38,6 +38,8 @@
 - **CGSR (Cryptographically:** Secure Random): This class provides a method to generate cryptographically secure random bytes, which can be crucial for creating secure tokens, keys, and other sensitive data.
 - **SecureSecretStorage:** This class provides a way to securely store and retrieve secrets, such as usernames and passwords, using the keyring library.
 - **SecureSessionManager:** This class manages user sessions securely, creating, validating, and ending sessions while keeping track of timestamps.
+- **SecureFileHandler:** Encrypt and upload files securely, as well as download and decrypt files with integrity verification.
+
 
 
 ## Installation
