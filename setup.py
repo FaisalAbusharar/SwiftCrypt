@@ -21,7 +21,7 @@ setup(
     long_description_content_type="text/markdown",
     long_description=long_description,
     packages=find_packages(),
-    install_requires=["bcrypt==4.0.1", "pyotp==2.9.0", "qrcode==7.4.2", "cryptography==41.0.3"],
+    install_requires=["bcrypt==4.0.1", "pyotp==2.9.0", "qrcode==7.4.2", "cryptography==41.0.3", "keyring=24.2.0"],
     keywords=['keys', 'passwords', 'crypting', 'encoding', 'secure', 'uuid'],
     classifiers=[
         "Development Status :: 5 - Production/Stable",

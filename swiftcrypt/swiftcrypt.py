@@ -17,11 +17,14 @@ from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives.asymmetric import rsa
 import requests
 from email.mime.multipart import MIMEMultipart
+import keyring
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 import sqlite3
 from io import BytesIO
 import time
+
+
 
 
 class SecretGenerator:
@@ -531,3 +534,112 @@ class SecureInputHandler:
     def close_connection(self):
         self.conn.close()
 
+
+class CGSR:
+    def __init__(self):
+        pass
+    
+    def generate_cryptographically_secure_random(self, num_bytes):
+        """
+        Generate cryptographically secure random bytes.
+
+        Args:
+            num_bytes (int): The number of random bytes to generate.
+
+        Returns:
+            bytes: A bytes object containing cryptographically secure random data.
+        """
+        return secrets.token_bytes(num_bytes)
+    
+    
+
+class SecureSecretStorage:
+    def __init__(self, service_name):
+        self.service_name = service_name
+
+    def store_secret(self, username, password):
+        """
+        Store a secret securely.
+
+        Args:
+            username (str): The username associated with the secret.
+            password (str): The secret password to store.
+        """
+        keyring.set_password(self.service_name, username, password)
+
+    def retrieve_secret(self, username):
+        """
+        Retrieve a secret securely.
+
+        Args:
+            username (str): The username associated with the secret.
+
+        Returns:
+            str: The retrieved secret password.
+        """
+        return keyring.get_password(self.service_name, username)
+
+    def delete_secret(self, username):
+        """
+        Delete a stored secret.
+
+        Args:
+            username (str): The username associated with the secret.
+        """
+        keyring.delete_password(self.service_name, username)
+        
+        
+class SecureSessionManager:
+    def __init__(self):
+        self.sessions = {}
+
+    def create_session(self, user_id):
+        """
+        Create a new session for the user.
+
+        Args:
+            user_id (str): The user's unique identifier.
+
+        Returns:
+            str: The generated session token.
+        """
+        session_token = str(uuid.uuid4())
+        self.sessions[session_token] = {
+            'user_id': user_id,
+            'timestamp': time.time()
+        }
+        return session_token
+
+    def validate_session(self, session_token, max_session_age=3600):
+        """
+        Validate a session token.
+
+        Args:
+            session_token (str): The session token to validate.
+            max_session_age (int): Maximum session age in seconds.
+
+        Returns:
+            bool: True if the session is valid, False otherwise.
+        """
+        if session_token in self.sessions:
+            session = self.sessions[session_token]
+            current_time = time.time()
+            session_age = current_time - session['timestamp']
+            if session_age <= max_session_age:
+                # Refresh the session timestamp
+                session['timestamp'] = current_time
+                return True
+            else:
+                # Session has expired
+                del self.sessions[session_token]
+        return False
+
+    def end_session(self, session_token):
+        """
+        End a session and remove it from the session storage.
+
+        Args:
+            session_token (str): The session token to end.
+        """
+        if session_token in self.sessions:
+            del self.sessions[session_token]
